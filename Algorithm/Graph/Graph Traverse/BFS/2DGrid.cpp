@@ -3,6 +3,7 @@ using namespace std;
 
 char grid[105][105];
 bool isVisited[105][105];
+int level[105][105];
 vector<pair<int, int>> d = {{-1, 0},{1, 0},{0, -1},{0, 1}};
 int n, m;
 
@@ -22,6 +23,7 @@ void bfs(int si, int sj){
     queue<pair<int, int>> q;
     q.push({si, sj});
     isVisited[si][sj] = true;
+    level[si][sj] = 0;
 
     while(!q.empty()){
 
@@ -31,7 +33,7 @@ void bfs(int si, int sj){
         int parI = parent.first;
         int parJ = parent.second;
 
-        cout << parI << " " << parJ << endl;
+        // cout << parI << " " << parJ << endl;
 
         for(int i = 0; i < 4; i++){
 
@@ -42,6 +44,7 @@ void bfs(int si, int sj){
 
                 q.push({xi, yj});
                 isVisited[xi][yj] = true;
+                level[xi][yj] = level[parI][parJ] + 1;
             }
         }
     }
@@ -65,11 +68,15 @@ int main()
         }
     }
 
-    int si, sj; cin >> si >> sj;
+    int si, sj, di, dj; cin >> si >> sj >> di >> dj;
 
     memset(isVisited, false, sizeof(isVisited));
+    memset(level, -1, sizeof(level));
 
     bfs(si, sj);
+
+
+    cout << "Level of " << di << " " << dj << " = " << level[di][dj];
     return 0;
 }
 
@@ -80,3 +87,4 @@ int main()
 // . . . .
 // . . . .
 // 1 2
+

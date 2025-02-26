@@ -10,35 +10,34 @@ int main()
 
     int adjMat[n][n];
 
-    // for(int i = 0; i < n; i++){
-
-    //     for(int j = 0; j < n; j++){
-
-    //         adjMat[i][j] = 0;
-    //     }
-    // }
-
     // shortcut of for loop
     memset(adjMat, 0, sizeof(adjMat));
 
     for(int i = 0; i < e; i++){
 
         int a, b; cin >> a >> b;
-
         adjMat[a][b] = 1;
-        adjMat[b][a] = 1;
 
     }
 
 
-    for(int i = 0; i < n; i++){
+    int q; cin >> q;
 
-        for(int j = 0; j < n; j++){
+    while(q--){
 
-            cout << adjMat[i][j] << " ";
+        int a, b; cin >> a >> b;
+
+        if(a < n && b < n && a >= 0 && b >= 0){
+
+            if((a == b || adjMat[a][b] == 1)){
+
+                cout << "YES" << endl;
+            }else{
+    
+                cout << "NO" << endl;
+            }
+
         }
-
-        cout << endl;
     }
     
 

@@ -8,7 +8,7 @@ int main()
 
     int n, e; cin >> n >> e;
 
-    int adjMat[n][e];
+    int adjMat[n][n];
 
     // shortcut of for loop
     memset(adjMat, 0, sizeof(adjMat));
