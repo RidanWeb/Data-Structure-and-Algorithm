@@ -1,3 +1,9 @@
+// print total component
+// and print all components
+
+
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
