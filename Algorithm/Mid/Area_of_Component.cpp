@@ -6,7 +6,9 @@ bool isVisited[1005][1005];
 
 int n, m;
 
-vector<pair<int, int>> direction = {{0,1}, {0, -1}, {-1, 0}, {1, 0}};
+int cnt = 0;
+
+vector<pair<int, int>> direction = {{0,1}, {0, -1}, {1, 0}, {-1, 0}};
 
 bool valid(int x, int y){
 
@@ -22,6 +24,7 @@ bool valid(int x, int y){
 
 void dfs(int si, int sj){
 
+    cnt++;
     isVisited[si][sj] = true;
 
     for(int i = 0; i < 4; i++){
@@ -29,7 +32,7 @@ void dfs(int si, int sj){
         int ci = si + direction[i].first;
         int cj = sj + direction[i].second;
 
-        if(valid(ci, cj) && !isVisited[ci][cj] && grid[ci][cj] != '#'){
+        if(valid(ci, cj) && !isVisited[ci][cj] && grid[ci][cj] == '.'){
 
             dfs(ci, cj);
         }
@@ -45,37 +48,41 @@ int main()
 
     cin >> n >> m;
 
-    int si, sj, di, dj;
-
     for(int i = 0; i < n; i++){
 
         for(int j = 0; j < m; j++){
 
             cin >> grid[i][j];
-
-            if(grid[i][j] == 'A'){
-
-                si = i;
-                sj = j;
-            }else if(grid[i][j] == 'B'){
-
-                di = i;
-                dj = j;
-            }
-
         }
     }
 
     memset(isVisited, false, sizeof(isVisited));
 
-    dfs(si, sj);
+    int minCom = INT_MAX;
 
-    if(isVisited[di][dj]){
+    for(int i = 0; i < n; i++){
 
-        cout << "YES" << endl;
+        for(int j = 0; j < m; j++){
+
+            if(!isVisited[i][j] && grid[i][j] == '.'){
+
+                cnt = 0;
+                dfs(i, j);
+                if(cnt < minCom){
+
+                    minCom = cnt;
+                }
+
+            }
+        }
+    }
+
+    if(minCom == INT_MAX){
+
+        cout << -1 << endl;
     }else{
-
-        cout << "NO" << endl;
+        
+        cout << minCom << endl;
     }
 
 
@@ -83,12 +90,3 @@ int main()
 
     return 0;
 }
-
-
-
-// 3 4
-// . . . .
-// . . . .
-// . . . .
-// 1 2
-

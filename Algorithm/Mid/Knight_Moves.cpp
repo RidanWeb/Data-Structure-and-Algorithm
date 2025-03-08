@@ -4,8 +4,8 @@ using namespace std;
 char grid[105][105];
 bool isVisited[105][105];
 int level[105][105];
-vector<pair<int, int>> d = {{-1, 0},{1, 0},{0, -1},{0, 1}};
-int n, m;
+vector<pair<int, int>> d = {{-1, 2},{-2, 1},{-2, -1},{-1, -2},{1, -2},{2, -1},{2, 1},{1, 2}};
+int m, n;
 
 bool valid(int si, int sj){
 
@@ -35,7 +35,7 @@ void bfs(int si, int sj){
 
         // cout << parI << " " << parJ << endl;
 
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 8; i++){
 
             int xi = parI + d[i].first;
             int yj = parJ + d[i].second;
@@ -56,37 +56,29 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
+    int tc; cin >> tc;
 
-    cin >> n >> m;
+    while(tc--){
 
-    for(int i = 0; i < n; i++){
+        cin >> n >> m;
 
-        for(int j = 0; j < m; j++){
+        memset(isVisited, false, sizeof(isVisited));
+        memset(level, -1, sizeof(level));
 
-            cin >> grid[i][j];
+        int qi, qj; cin >> qi >> qj;
 
-        }
+        bfs(qi, qj);
+
+        int di, dj; cin >> di >> dj;
+
+        cout << level[di][dj] << endl;
+
     }
 
-    int si, sj, di, dj; cin >> si >> sj >> di >> dj;
-
-    memset(isVisited, false, sizeof(isVisited));
-    memset(level, -1, sizeof(level));
-
-    bfs(si, sj);
-
-
-    cout << "Level of " << di << " " << dj << " = " << level[di][dj];
     return 0;
 }
 
 
-
-// 3 4
-// . . . .
-// . . . .
-// . . . .
-// 1 2
 
 
 
